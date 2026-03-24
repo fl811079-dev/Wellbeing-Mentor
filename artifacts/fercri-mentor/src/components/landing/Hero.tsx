@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function Hero() {
-  const scrollToContact = () => {
-    document.querySelector("#contacto")?.scrollIntoView({ behavior: "smooth" });
+  const openWhatsApp = () => {
+    const phone = "59164544229";
+    const message = encodeURIComponent("Hola, me gustaría agendar una sesión de psicología o mentoría profesional");
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank", "noopener,noreferrer");
   };
 
   const scrollToServices = () => {
@@ -48,7 +50,7 @@ export function Hero() {
             
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button 
-                onClick={scrollToContact}
+                onClick={openWhatsApp}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-base bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Agendar Primera Sesión
