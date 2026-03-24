@@ -19,6 +19,7 @@ export function Navbar() {
     { name: "Servicios", href: "#servicios" },
     { name: "Sobre Mí", href: "#sobre-mi" },
     { name: "Testimonios", href: "#testimonios" },
+    { name: "Contacto", href: "#contacto-form" },
   ];
 
   const scrollTo = (id: string) => {

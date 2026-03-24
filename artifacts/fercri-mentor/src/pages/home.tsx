@@ -4,6 +4,7 @@ import { Services } from "@/components/landing/Services";
 import { About } from "@/components/landing/About";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Cta } from "@/components/landing/Cta";
+import { Contact } from "@/components/landing/Contact";
 import { Footer } from "@/components/landing/Footer";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <About />
         <Testimonials />
         <Cta />
+        <Contact />
       </main>
       <Footer />
     </div>
