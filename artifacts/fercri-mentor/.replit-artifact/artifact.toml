@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "FERCRI Mentor App"
+version = "1.0.0"
+id = "artifacts/fercri-mentor"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24169
+
+[services.development]
+run = "pnpm --filter @workspace/fercri-mentor run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fercri-mentor", "run", "build" ]
+publicDir = "artifacts/fercri-mentor/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24169"
+BASE_PATH = "/"

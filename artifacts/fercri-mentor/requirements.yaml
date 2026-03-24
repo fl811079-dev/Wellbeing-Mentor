@@ -1,0 +1,13 @@
+packages:
+  "framer-motion": "For smooth reveal animations and premium scroll effects on the landing page"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to merge tailwind classes safely"
+
+images:
+  - path: "artifacts/fercri-mentor/public/images/hero-bg.png"
+    description: "Soft, calming abstract background, gentle waves of light blue, white, and very pale grey, minimalist, premium, therapeutic, highly elegant"
+    aspect_ratio: "16:9"
+
+notes:
+  - No backend required for this landing page.
+  - Using Framer Motion for scroll-triggered visual enhancements to meet the 'exceptional' design requirement.
