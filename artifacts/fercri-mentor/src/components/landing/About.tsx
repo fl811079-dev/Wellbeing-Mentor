@@ -3,10 +3,10 @@ import { Award, BookOpen, GraduationCap, Microscope, Users } from "lucide-react"
 
 const credentials = [
   { text: "25 Años de Experiencia Clínica y Académica", icon: Award },
-  { text: "Psicóloga Clínica Certificada", icon: GraduationCap },
-  { text: "Profesora Universitaria de Psicología", icon: BookOpen },
-  { text: "Investigadora en Bienestar Emocional", icon: Microscope },
-  { text: "Mentora de Profesionales de la Salud Mental", icon: Users },
+  { text: "Psicólogo Clínico Certificado", icon: GraduationCap },
+  { text: "Profesor Universitario de Psicología", icon: BookOpen },
+  { text: "Investigador en Bienestar Emocional", icon: Microscope },
+  { text: "Mentor de Profesionales de la Salud Mental", icon: Users },
 ];
 
 export function About() {
@@ -25,14 +25,14 @@ export function About() {
           >
             <div className="aspect-[4/5] rounded-[2rem] overflow-hidden relative shadow-2xl shadow-primary/10 border border-white/50 dark:border-white/10 bg-white dark:bg-card">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-                alt="Dra. Fernanda Cristina"
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+                alt="Dr. Fernando Cristian"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <div className="font-display font-bold text-2xl">Dra. Fernanda Cristina</div>
-                <div className="text-white/80 font-medium">Psicóloga Clínica · Profesora Universitaria</div>
+                <div className="font-display font-bold text-2xl">Dr. Fernando Cristian</div>
+                <div className="text-white/80 font-medium">Psicólogo Clínico · Profesor Universitario</div>
               </div>
             </div>
 
@@ -47,15 +47,15 @@ export function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-2">Sobre la Mentora</h2>
-            <h3 className="text-xl text-primary font-medium mb-6">Psicóloga Clínica & Profesora Universitaria</h3>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-2">Sobre el Mentor</h2>
+            <h3 className="text-xl text-primary font-medium mb-6">Psicólogo Clínico & Profesor Universitario</h3>
 
             <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
               <p>
-                Con <strong className="text-foreground">25 años de trayectoria</strong> en el campo de la psicología clínica y la docencia universitaria, la Dra. Fernanda Cristina ha dedicado su vida profesional a la comprensión profunda de la conducta humana, el bienestar emocional y el desarrollo integral de la persona.
+                Con <strong className="text-foreground">25 años de trayectoria</strong> en el campo de la psicología clínica y la docencia universitaria, el Dr. Fernando Cristian ha dedicado su vida profesional a la comprensión profunda de la conducta humana, el bienestar emocional y el desarrollo integral de la persona.
               </p>
               <p>
-                Como profesora universitaria, ha formado a generaciones de profesionales de la salud mental, integrando los últimos avances en neurociencia afectiva, psicoterapia basada en evidencia y teoría del apego en su práctica clínica y académica.
+                Como profesor universitario, ha formado a generaciones de profesionales de la salud mental, integrando los últimos avances en neurociencia afectiva, psicoterapia basada en evidencia y teoría del apego en su práctica clínica y académica.
               </p>
               <p>
                 Su enfoque combina el rigor científico de la psicología académica con una sensibilidad humana profunda, creando un espacio de mentoría donde la transformación personal y el crecimiento profesional se articulan de manera integral y sostenida.

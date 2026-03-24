@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "La mentoría con Fernanda cambió por completo mi perspectiva profesional. Logré superar el síndrome del impostor y asumir un rol de liderazgo con confianza.",
+    quote: "La mentoría con el Dr. Fernando Cristian cambió por completo mi perspectiva profesional. Logré superar el síndrome del impostor y asumir un rol de liderazgo con confianza.",
     author: "Laura M.",
     role: "Directora de Marketing"
   },
@@ -13,20 +13,19 @@ const testimonials = [
     role: "Emprendedor"
   },
   {
-    quote: "Buscaba un equilibrio entre mi vida personal y mi carrera exigente. El programa de crecimiento personal fue exactamente lo que necesitaba para reconectar conmigo misma.",
-    author: "Sofia T.",
-    role: "Abogada"
+    quote: "Buscaba un equilibrio entre mi vida personal y mi carrera exigente. El programa de crecimiento personal fue exactamente lo que necesitaba para reconectar conmigo mismo.",
+    author: "Sebastián T.",
+    role: "Abogado"
   }
 ];
 
 export function Testimonials() {
   return (
     <section id="testimonios" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative gradient */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
