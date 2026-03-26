@@ -99,9 +99,9 @@
   --muted: 210 40% 96%;
   --muted-foreground: 215 16% 47%;
   
-  /* Accent: A gentle teal for subtle highlights */
-  --accent: 180 40% 90%;
-  --accent-foreground: 180 50% 20%;
+  /* Accent: Warm academic gold */
+  --accent: 43 74% 52%;
+  --accent-foreground: 0 0% 100%;
   
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
@@ -150,8 +150,8 @@
   --muted: 217 32% 17%;
   --muted-foreground: 215 20% 65%;
   
-  --accent: 180 30% 25%;
-  --accent-foreground: 180 40% 90%;
+  --accent: 43 74% 40%;
+  --accent-foreground: 0 0% 100%;
   
   --destructive: 0 62% 30%;
   --destructive-foreground: 210 40% 98%;
