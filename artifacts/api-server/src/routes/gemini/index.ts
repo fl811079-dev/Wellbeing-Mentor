@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { db } from "@workspace/db";
-import { conversationsTable, messagesTable } from "@workspace/db/schema";
+import {
+  conversations as conversationsTable,
+  messages as messagesTable,
+} from "@workspace/db/schema";
 import { eq } from "drizzle-orm";
 import { ai } from "@workspace/integrations-gemini-ai";
 
@@ -13,11 +16,11 @@ const ALMA_SYSTEM_PROMPT =
   "Si detectas riesgo de vida, deriva urgentemente a la línea 800-10-0024 en Bolivia.";
 
 geminiRouter.get("/conversations", async (_req, res) => {
-  const conversations = await db
+  const rows = await db
     .select()
     .from(conversationsTable)
     .orderBy(conversationsTable.createdAt);
-  res.json(conversations);
+  res.json(rows);
 });
 
 geminiRouter.post("/conversations", async (req, res) => {
@@ -39,12 +42,12 @@ geminiRouter.get("/conversations/:id", async (req, res) => {
     res.status(404).json({ error: "Conversation not found" });
     return;
   }
-  const messages = await db
+  const msgs = await db
     .select()
     .from(messagesTable)
     .where(eq(messagesTable.conversationId, id))
     .orderBy(messagesTable.createdAt);
-  res.json({ ...conv, messages });
+  res.json({ ...conv, messages: msgs });
 });
 
 geminiRouter.delete("/conversations/:id", async (req, res) => {
@@ -64,12 +67,12 @@ geminiRouter.delete("/conversations/:id", async (req, res) => {
 
 geminiRouter.get("/conversations/:id/messages", async (req, res) => {
   const id = parseInt(req.params.id);
-  const messages = await db
+  const msgs = await db
     .select()
     .from(messagesTable)
     .where(eq(messagesTable.conversationId, id))
     .orderBy(messagesTable.createdAt);
-  res.json(messages);
+  res.json(msgs);
 });
 
 geminiRouter.post("/conversations/:id/messages", async (req, res) => {

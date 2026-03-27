@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2, Mail, User, MessageSquare } from "lucide-react";
+import { Send, CheckCircle2, Mail, User, MessageSquare, Phone } from "lucide-react";
+
+const WHATSAPP_NUMBER = "59164544229";
+const WHATSAPP_MSG = encodeURIComponent("Hola, me gustaría agendar una sesión de psicología o mentoría profesional");
 
 type FormState = "idle" | "submitting" | "success";
 
@@ -78,19 +81,28 @@ export function Contact() {
             <div className="space-y-6">
               {[
                 {
+                  icon: Phone,
+                  label: "WhatsApp / Teléfono",
+                  value: "+591 64544229",
+                  href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`,
+                },
+                {
                   icon: Mail,
                   label: "Correo electrónico",
                   value: "contacto@fercri.com",
+                  href: "mailto:contacto@fercri.com",
                 },
                 {
                   icon: MessageSquare,
                   label: "Tiempo de respuesta",
                   value: "En menos de 24 horas hábiles",
+                  href: null,
                 },
                 {
                   icon: User,
                   label: "Modalidad",
                   value: "Sesiones online para todo el mundo",
+                  href: null,
                 },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
@@ -101,7 +113,18 @@ export function Contact() {
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">
                       {item.label}
                     </p>
-                    <p className="text-foreground font-medium">{item.value}</p>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground font-medium hover:text-primary transition-colors"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-foreground font-medium">{item.value}</p>
+                    )}
                   </div>
                 </div>
               ))}

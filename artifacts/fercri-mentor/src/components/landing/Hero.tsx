@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export function Hero() {
   const openWhatsApp = () => {
-    const phone = "59164544229";
+    const phone = "59164544229"; // +591 64544229 (Bolivia)
     const message = encodeURIComponent("Hola, me gustaría agendar una sesión de psicología o mentoría profesional");
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank", "noopener,noreferrer");
   };

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 
+const WA_URL = `https://wa.me/59164544229?text=${encodeURIComponent("Hola, me gustaría agendar una sesión de psicología o mentoría profesional")}`;
+
 export function Cta() {
   return (
     <section id="contacto" className="py-24 px-4 sm:px-6 lg:px-8 relative">
@@ -23,11 +25,16 @@ export function Cta() {
               Agenda tu primera sesión exploratoria. Juntos diseñaremos un plan personalizado para alcanzar tu bienestar emocional y tus metas profesionales.
             </p>
 
-            <button className="group mx-auto px-8 py-4 rounded-xl font-bold text-lg bg-white text-primary shadow-xl hover:shadow-2xl hover:bg-slate-50 transition-all duration-300 flex items-center gap-3">
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mx-auto px-8 py-4 rounded-xl font-bold text-lg bg-white text-primary shadow-xl hover:shadow-2xl hover:bg-slate-50 transition-all duration-300 inline-flex items-center gap-3"
+            >
               <Calendar className="w-5 h-5" />
               Agendar tu Sesión
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
             <p className="mt-4 text-sm text-primary-foreground/70">
               Modalidad online disponible para todo el mundo.
             </p>
