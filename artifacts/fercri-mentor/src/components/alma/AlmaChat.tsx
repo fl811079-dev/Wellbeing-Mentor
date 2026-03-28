@@ -249,9 +249,8 @@ export function AlmaChat() {
                 </button>
               </div>
               <p className="text-center text-xs text-muted-foreground mt-1.5 leading-snug">
-                © 2026 FERCRI — Todos los Derechos Reservados.<br />
-                Patente de Sistema de Biofeedback en Trámite.<br />
-                Prohibida su reproducción total o parcial.
+                © 2026 FERCRI - Todos los Derechos Reservados | Patente de Biofeedback en Trámite<br />
+                Bajo Supervisión del Dr. (c) Cristofer - Científico de la Salud Mental Global Digital
               </p>
             </div>
           </motion.div>
