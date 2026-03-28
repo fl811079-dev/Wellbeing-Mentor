@@ -248,8 +248,10 @@ export function AlmaChat() {
                   <Send className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-center text-xs text-muted-foreground mt-1.5">
-                Powered by Gemini · FERCRI Mentor App
+              <p className="text-center text-xs text-muted-foreground mt-1.5 leading-snug">
+                © 2026 FERCRI — Todos los Derechos Reservados.<br />
+                Patente de Sistema de Biofeedback en Trámite.<br />
+                Prohibida su reproducción total o parcial.
               </p>
             </div>
           </motion.div>
