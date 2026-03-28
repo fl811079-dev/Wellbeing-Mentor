@@ -42,9 +42,10 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {currentYear} FERCRI Mentor App — Dr. Fernando Cristian. Todos los derechos reservados.
-          </p>
+          <div className="text-sm text-muted-foreground space-y-1 text-center md:text-left">
+            <p>© {currentYear} FERCRI Mentor &amp; Consultor. Todos los derechos reservados. Patente Pendiente.</p>
+            <p>ALMA es una marca registrada bajo supervisión del Dr. (c) Cristofer.</p>
+          </div>
           <div className="flex gap-4">
             <div className="w-2 h-2 rounded-full bg-border" />
             <div className="w-2 h-2 rounded-full bg-border" />
