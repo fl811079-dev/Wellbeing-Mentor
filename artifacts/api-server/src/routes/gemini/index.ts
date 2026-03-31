@@ -3,8 +3,9 @@ import { db } from "@workspace/db";
 import {
   conversations as conversationsTable,
   messages as messagesTable,
+  emotionalPulses as emotionalPulsesTable,
 } from "@workspace/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { ai } from "@workspace/integrations-gemini-ai";
 
 const geminiRouter = Router();
@@ -285,6 +286,37 @@ geminiRouter.post("/conversations/:id/messages", async (req, res) => {
 
   res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
   res.end();
+});
+
+// ─── Emotional Pulse endpoints ───────────────────────────────────────────────
+
+geminiRouter.post("/pulse", async (req, res) => {
+  const { sessionId, emotionalState } = req.body as {
+    sessionId: string;
+    emotionalState: string;
+  };
+  if (!sessionId || !emotionalState) {
+    res.status(400).json({ error: "sessionId and emotionalState required" });
+    return;
+  }
+  const [record] = await db
+    .insert(emotionalPulsesTable)
+    .values({ sessionId, emotionalState })
+    .returning();
+  res.status(201).json(record);
+});
+
+geminiRouter.get("/pulse/stats", async (_req, res) => {
+  const rows = await db
+    .select({
+      emotionalState: emotionalPulsesTable.emotionalState,
+      count: sql<number>`cast(count(*) as int)`,
+    })
+    .from(emotionalPulsesTable)
+    .groupBy(emotionalPulsesTable.emotionalState)
+    .orderBy(sql`count(*) desc`);
+  const total = rows.reduce((sum, r) => sum + r.count, 0);
+  res.json({ total, breakdown: rows });
 });
 
 export default geminiRouter;

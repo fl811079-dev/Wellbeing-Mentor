@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Bot, ChevronDown, AlertTriangle, Wrench } from "lucide-react";
 import { ToolboxModal } from "./Toolbox";
+import { PulseMonitor } from "./PulseMonitor";
 
 type Message = {
   id: string;
@@ -20,6 +21,10 @@ export function AlmaChat() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [toolboxOpen, setToolboxOpen] = useState(false);
+  const [pulseRecorded, setPulseRecorded] = useState(false);
+  const sessionId = useRef<string>(
+    `anon-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+  );
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +51,18 @@ export function AlmaChat() {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [isOpen]);
+
+  const handlePulseSelect = async (state: string) => {
+    setPulseRecorded(true);
+    try {
+      await fetch("/api/gemini/pulse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId: sessionId.current, emotionalState: state }),
+      });
+    } catch {}
+    setTimeout(() => inputRef.current?.focus(), 200);
+  };
 
   const getOrCreateConversation = async (): Promise<number> => {
     if (conversationId) return conversationId;
@@ -208,6 +225,11 @@ export function AlmaChat() {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-background">
+              <AnimatePresence>
+                {hasStarted && !pulseRecorded && (
+                  <PulseMonitor onSelect={handlePulseSelect} />
+                )}
+              </AnimatePresence>
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -267,8 +289,8 @@ export function AlmaChat() {
                 </button>
               </div>
               <p className="text-center text-xs text-muted-foreground mt-1.5 leading-snug">
-                © 2026 FERCRI - Todos los Derechos Reservados | Patente de Biofeedback en Trámite<br />
-                Bajo Supervisión del Dr. (c) Cristofer - Científico de la Salud Mental Global Digital
+                FERCRI Mentor &amp; Consultor — División de Salud Mental Global Digital<br />
+                Bajo la Dirección del Dr. (c) Cristofer
               </p>
             </div>
           </motion.div>
