@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Bot, ChevronDown, AlertTriangle, Wrench } from "lucide-react";
 import { ToolboxModal } from "./Toolbox";
 import { PulseMonitor } from "./PulseMonitor";
+import { GeoWelcome } from "./GeoWelcome";
 
 type Message = {
   id: string;
@@ -203,6 +204,9 @@ export function AlmaChat() {
                 <ChevronDown className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Geo Welcome Banner */}
+            <GeoWelcome />
 
             {/* Disclaimer */}
             <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-start gap-2 shrink-0">
