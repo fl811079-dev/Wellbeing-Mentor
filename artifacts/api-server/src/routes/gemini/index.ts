@@ -319,4 +319,59 @@ geminiRouter.get("/pulse/stats", async (_req, res) => {
   res.json({ total, breakdown: rows });
 });
 
+// ─── Full Impact Report ────────────────────────────────────────────────────────
+
+geminiRouter.get("/stats", async (_req, res) => {
+  const [uniqueSessionsRow] = await db
+    .select({ count: sql<number>`cast(count(distinct session_id) as int)` })
+    .from(emotionalPulsesTable);
+
+  const [totalConvsRow] = await db
+    .select({ count: sql<number>`cast(count(*) as int)` })
+    .from(conversationsTable);
+
+  const [totalMsgsRow] = await db
+    .select({ count: sql<number>`cast(count(*) as int)` })
+    .from(messagesTable);
+
+  const deepEngagementRows = await db
+    .select({
+      conversationId: messagesTable.conversationId,
+      msgCount: sql<number>`cast(count(*) as int)`,
+    })
+    .from(messagesTable)
+    .groupBy(messagesTable.conversationId)
+    .having(sql`count(*) >= 6`);
+
+  const totalConvs = totalConvsRow?.count ?? 0;
+  const deepConvs = deepEngagementRows.length;
+  const narrativeSuccessRate =
+    totalConvs > 0 ? Math.round((deepConvs / totalConvs) * 100) : 0;
+
+  const emotionRows = await db
+    .select({
+      emotionalState: emotionalPulsesTable.emotionalState,
+      count: sql<number>`cast(count(*) as int)`,
+    })
+    .from(emotionalPulsesTable)
+    .groupBy(emotionalPulsesTable.emotionalState)
+    .orderBy(sql`count(*) desc`);
+
+  const totalPulses = emotionRows.reduce((s, r) => s + r.count, 0);
+
+  res.json({
+    uniqueSessions: uniqueSessionsRow?.count ?? 0,
+    totalConversations: totalConvs,
+    totalMessages: totalMsgsRow?.count ?? 0,
+    narrativeSuccessRate,
+    dominantEmotion: emotionRows[0]?.emotionalState ?? "Sin datos",
+    emotionBreakdown: emotionRows.map((r) => ({
+      state: r.emotionalState,
+      count: r.count,
+      percentage: totalPulses > 0 ? Math.round((r.count / totalPulses) * 100) : 0,
+    })),
+    generatedAt: new Date().toISOString(),
+  });
+});
+
 export default geminiRouter;
