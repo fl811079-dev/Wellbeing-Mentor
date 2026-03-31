@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Bot, ChevronDown, AlertTriangle } from "lucide-react";
+import { X, Send, Bot, ChevronDown, AlertTriangle, Wrench } from "lucide-react";
+import { ToolboxModal } from "./Toolbox";
 
 type Message = {
   id: string;
@@ -18,6 +19,7 @@ export function AlmaChat() {
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [toolboxOpen, setToolboxOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -158,9 +160,10 @@ export function AlmaChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] rounded-3xl shadow-2xl overflow-hidden border border-border flex flex-col"
+            className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] rounded-3xl shadow-2xl overflow-hidden border border-border flex flex-col relative"
             style={{ height: "540px", maxHeight: "calc(100vh - 5rem)" }}
           >
+            <ToolboxModal isOpen={toolboxOpen} onClose={() => setToolboxOpen(false)} />
             {/* Header */}
             <div
               className="px-5 py-4 flex items-center gap-3 text-white shrink-0"
@@ -187,7 +190,20 @@ export function AlmaChat() {
             {/* Disclaimer */}
             <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-start gap-2 shrink-0">
               <AlertTriangle className="w-3.5 h-3.5 text-amber-600 mt-0.5 shrink-0" />
-              <p className="text-xs text-amber-800 leading-snug">{DISCLAIMER}</p>
+              <p className="text-xs text-amber-800 leading-snug flex-1">{DISCLAIMER}</p>
+            </div>
+
+            {/* Toolbox bar */}
+            <div className="px-4 py-2 border-b border-border bg-background shrink-0 flex items-center justify-between">
+              <p className="text-xs text-muted-foreground">Herramientas clínicas disponibles</p>
+              <button
+                onClick={() => setToolboxOpen(true)}
+                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full text-white transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #1A56B0, #D4A017)" }}
+              >
+                <Wrench className="w-3 h-3" />
+                Caja de Herramientas
+              </button>
             </div>
 
             {/* Messages */}
