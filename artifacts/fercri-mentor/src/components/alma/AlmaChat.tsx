@@ -28,7 +28,7 @@ export function AlmaChat() {
           id: "welcome",
           role: "assistant",
           content:
-            "Hola, soy ALMA 🌿 Estoy aquí para acompañarte. ¿Cómo te encuentras hoy?",
+            "Bienvenido/a. Soy ALMA 🌿 — Asistente Logoterapéutica bajo la supervisión clínica del Dr. (c) Cristofer, Psicólogo Clínico, Investigador Doctoral y especialista en Logoterapia Avanzada con más de 25 años de experiencia.\n\nEste es un espacio seguro, confidencial y basado en evidencia científica. Estoy aquí para acompañarte en tu bienestar emocional.\n\n¿Cómo te encuentras hoy? Cuéntame con confianza.",
         },
       ]);
       setHasStarted(true);
@@ -212,7 +212,9 @@ export function AlmaChat() {
                         : "bg-secondary text-foreground rounded-bl-sm"
                     }`}
                   >
-                    {msg.content || (
+                    {msg.content ? (
+                      <span className="whitespace-pre-wrap">{msg.content}</span>
+                    ) : (
                       <span className="flex gap-1 items-center h-4">
                         <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground animate-bounce [animation-delay:0ms]" />
                         <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground animate-bounce [animation-delay:150ms]" />
