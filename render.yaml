@@ -1,0 +1,49 @@
+services:
+  # ── API Server (Express + Node.js) ────────────────────────────────────────
+  - type: web
+    name: wellbeing-mentor-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: "npm install -g pnpm@10 && pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build"
+    startCommand: "node --enable-source-maps artifacts/api-server/dist/index.mjs"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # PostgreSQL connection string — set this in the Render dashboard
+      # e.g. postgres://user:password@host:5432/dbname
+      - key: DATABASE_URL
+        sync: false
+      # Gemini AI integration — set these in the Render dashboard
+      - key: AI_INTEGRATIONS_GEMINI_BASE_URL
+        sync: false
+      - key: AI_INTEGRATIONS_GEMINI_API_KEY
+        sync: false
+
+  # ── Frontend (Vite static site) ───────────────────────────────────────────
+  - type: web
+    name: wellbeing-mentor-frontend
+    env: static
+    region: oregon
+    plan: free
+    buildCommand: "npm install -g pnpm@10 && pnpm install --frozen-lockfile && pnpm --filter @workspace/fercri-mentor run build"
+    staticPublishPath: artifacts/fercri-mentor/dist/public
+    pullRequestPreviewsEnabled: false
+    routes:
+      # Rewrite all routes to index.html so the React SPA router handles them
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      # PORT and BASE_PATH are required by vite.config.ts at build time.
+      # PORT is not used in the static output — 3000 is just a placeholder.
+      - key: PORT
+        value: "3000"
+      - key: BASE_PATH
+        value: "/"
+      - key: NODE_ENV
+        value: production
+      # Set this to your API server's public URL after deploying wellbeing-mentor-api.
+      # e.g. https://wellbeing-mentor-api.onrender.com
+      - key: VITE_API_URL
+        sync: false
